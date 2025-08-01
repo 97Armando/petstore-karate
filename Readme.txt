@@ -21,12 +21,12 @@ Configure sus variables de entorno `M2_HOME` y `PATH`.
 # Instrucciones de Ejecución
 
 1.Clonar el Repositorio:
-  bash
+  desde un terminal ejecute
   git clone https://github.com/97Armando/petstore-karate.git
   cd petstore-karate
 
 2.Ejecutar las Pruebas:
-  Abre una terminal en la raíz del proyecto y ejecuta el siguiente comando Maven:
+  Abra una terminal en la raíz del proyecto y ejecute el siguiente comando Maven:
   mvn clean test
 
   Este comando compilará el proyecto, ejecutará las pruebas definidas en los archivos .feature de Karate y generará los reportes.

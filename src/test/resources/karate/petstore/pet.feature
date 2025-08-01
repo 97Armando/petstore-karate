@@ -1,10 +1,10 @@
-  Feature: Manage pets in PetStore
+  Feature: Administra mascotas en PetStore
 
     Background:
       * url baseUrl
       * configure headers = { 'Content-Type': 'application/json' }
 
-    Scenario: Add a new pet, consult, update and consult by status
+    Scenario: Añadir una nueva mascota, consultar, actualizar y consultar por estado
 
       Given path '/pet'
       And request
@@ -35,7 +35,7 @@
       And match response.name == 'doggie'
       * def petId = response.id
       * def petName = response.name
-
+      * print 'New pet created with ID:', petId
 
       Given path '/pet/' + petId
       When method GET
@@ -50,7 +50,7 @@
       And request
         """
         {
-      "id":
+      "id": #(petId),
       "category": {
       "id": 1,
       "name": "Dogs"
@@ -81,4 +81,10 @@
       When method GET
       Then status 200
       And print response
-      And match response contains { id:, name: 'new_doggie_name', status: 'sold' }
+      * def foundPet = karate.filter(response, function(pet) { return pet.id == petId; })
+      * match foundPet[0].id == petId
+      * match foundPet[0].name == 'new_doggie_name'
+      * match foundPet[0].status == 'sold'
+        #* def foundPet = karate.filter(response, function(pet) { return pet.id == petId; })
+      #* match foundPet[0] == { id: petId, name: 'new_doggie_name', status: 'sold' }
+        #And match response contains { id: #(petId), name: 'new_doggie_name', status: 'sold' }

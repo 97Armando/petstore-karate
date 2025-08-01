@@ -1,0 +1,35 @@
+###Conclusiones del Ejercicio de Automatización de API REST con Karate DSL
+
+##Hallazgos
+
+#Claridad y Legibilidad con Karate DSL: 
+El lenguaje de dominio específico (DSL) de Karate demostró ser extremadamente intuitivo y legible para la automatización de APIs. 
+Los escenarios escritos en un formato Gherkin simplificado facilitaron la comprensión del flujo de prueba y las interacciones con la API.
+
+#Identificación y Captura de Entradas y Salidas: 
+Se logró claramente identificar las entradas (cuerpo de la solicitud, parámetros de la URL) para cada operación (POST, GET, PUT). 
+La función 'print response' fue fundamental para capturar y visualizar las salidas de cada llamada API, permitiendo un análisis detallado de la respuesta JSON.
+
+#Manejo de Variables: 
+La capacidad de Karate para capturar valores de la respuesta ('* def petId = response.id') y reutilizarlos en solicitudes posteriores fue clave para encadenar
+las pruebas y crear un flujo E2E realista a nivel de API.
+
+#Aserciones Potentes: 
+Las capacidades de aserción de Karate permitieron validar no solo el código de estado HTTP, sino también la estructura y los valores específicos dentro
+de las respuestas JSON, incluyendo la verificación de que el objeto modificado estaba presente en la búsqueda por estatus.
+
+#Configuración Simplificada: 
+El archivo 'karate-config.js' demostró ser un lugar eficiente para definir la 'baseUrl' y otras configuraciones globales, manteniendo los archivos '.feature' limpios y 
+enfocados en la lógica de la prueba.
+
+#Generación de Reportes Completos:
+Karate genera automáticamente reportes HTML detallados que incluyen todos los pasos ejecutados, las solicitudes y respuestas completas, y los resultados de las aserciones, 
+lo que facilita la depuración y la revisión de los resultados.
+
+#Conclusiones
+Este ejercicio confirma lo ideal que Karate DSL como una herramienta robusta y eficiente para la automatización de pruebas de API REST. Su diseño basado en DSL reduce 
+significativamente la curva de aprendizaje para testers y desarrolladores, permitiendo la creación rápida de pruebas concisas y mantenibles.
+La capacidad de Karate para manejar flujos complejos de API directamente dentro de los archivos '.feature' es una gran ventaja. 
+Lo que resulta en un código de prueba más limpio y un ciclo de desarrollo de pruebas más rápido.
+Recomiendo Karate DSL para proyectos que requieren una automatización de API ágil y colaborativa, donde la legibilidad y la facilidad de mantenimiento son prioritarias. 
+Su integración con Maven y JUnit facilita su adopción en ecosistemas de desarrollo Java existentes.

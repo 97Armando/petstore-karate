@@ -1,0 +1,29 @@
+[
+  {
+    "id": 10001,
+    "category_id": 1,
+    "category_name": "Dogs",
+    "name": "doggie",
+    "status": "available",
+    "new_name": "new_doggie_name",
+    "new_status": "sold"
+  },
+  {
+    "id": 10002,
+    "category_id": 2,
+    "category_name": "Cats",
+    "name": "kitty",
+    "status": "available",
+    "new_name": "new_kitty_name",
+    "new_status": "pending"
+  },
+  {
+    "id": 10003,
+    "category_id": 3,
+    "category_name": "Birds",
+    "name": "tweety",
+    "status": "available",
+    "new_name": "new_tweety_name",
+    "new_status": "sold"
+  }
+]

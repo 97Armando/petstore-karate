@@ -1,21 +1,21 @@
-  Feature: Administra mascotas en PetStore
+  Feature: Administra mascotas en PetStore con datos json
 
     Background:
       * url baseUrl
       * configure headers = { 'Content-Type': 'application/json' }
 
-    Scenario: Añadir una nueva mascota, consultar, actualizar y consultar por estado
+    Scenario Outline: Añadir una nueva mascota, consultar, actualizar y consultar por estado
 
       Given path '/pet'
       And request
         """
         {
-      "id": 99999,
+      "id": <id>,
       "category": {
-      "id": 1,
-      "name": "Dogs"
+      "id": <category_id>,
+      "name": "<category_name>"
       },
-      "name": "doggie",
+      "name": "<name>",
       "photoUrls": [
       "string"
       ],
@@ -25,37 +25,35 @@
       "name": "string"
       }
       ],
-      "status": "available"
+      "status": "<status>"
       }
       """
       When method POST
       Then status 200
       And print response
-      And match response.id == 99999
-      And match response.name == 'doggie'
-      * def petId = response.id
-      * def petName = response.name
-      * print 'New pet created with ID:', petId
+      And match response.id == <id>
+      And match response.name == '<name>'
+      And match response.status == '<status>'
 
-      Given path '/pet/' + petId
+      Given path '/pet/' + <id>
       When method GET
       Then status 200
       And print response
-      And match response.id == petId
-      And match response.name == 'doggie'
-      And match response.status == 'available'
+      And match response.id == <id>
+      And match response.name == '<name>'
+      And match response.status == '<status>'
 
 
       Given path '/pet'
       And request
         """
         {
-      "id": #(petId),
+      "id": <id>,
       "category": {
-      "id": 1,
-      "name": "Dogs"
+      "id": <category_id>,
+      "name": "<category_name>"
       },
-      "name": "new_doggie_name",
+      "name": "<new_name>",
       "photoUrls": [
       "string"
       ],
@@ -65,26 +63,27 @@
       "name": "string"
       }
       ],
-      "status": "sold"
+      "status": "<new_status>"
       }
       """
       When method PUT
       Then status 200
       And print response
-      And match response.id == petId
-      And match response.name == 'new_doggie_name'
-      And match response.status == 'sold'
+      And match response.id == <id>
+      And match response.name == '<new_name>'
+      And match response.status == '<new_status>'
 
 
       Given path '/pet/findByStatus'
-      And param status = 'sold'
+      And param status = '<new_status>'
       When method GET
       Then status 200
       And print response
-      * def foundPet = karate.filter(response, function(pet) { return pet.id == petId; })
-      * match foundPet[0].id == petId
-      * match foundPet[0].name == 'new_doggie_name'
-      * match foundPet[0].status == 'sold'
-        #* def foundPet = karate.filter(response, function(pet) { return pet.id == petId; })
-      #* match foundPet[0] == { id: petId, name: 'new_doggie_name', status: 'sold' }
-        #And match response contains { id: #(petId), name: 'new_doggie_name', status: 'sold' }
+      * def foundPet = karate.filter(response, function(pet) { return pet.id == <id>; })
+      * match foundPet[0].id == <id>
+      * match foundPet[0].name == '<new_name>'
+      * match foundPet[0].status == '<new_status>'
+
+      Examples:
+        | read('pet_data.json') |
+
